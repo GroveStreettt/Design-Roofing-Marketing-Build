@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Roofing — RoofOS Marketing Build</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --bg2: #ede9e2;
+    --bg3: #e5e0d7;
+    --surface: #ffffff;
+    --border: #d8d2c7;
+    --accent: #b84c1e;
+    --accent2: #8a6a3b;
+    --accent-light: rgba(184, 76, 30, 0.07);
+    --text: #1e1a16;
+    --muted: #6b6358;
+    --light-muted: #9e9589;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(247, 244, 239, 0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 54px;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+  .nav-brand span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem 5rem 6rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(160deg, #f7f4ef 60%, #ede9e2 100%);
+  }
+  .hero-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.5s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--text);
+    max-width: 900px;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 580px;
+    line-height: 1.85;
+    margin-bottom: 3.5rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+    max-width: 760px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .meta-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--light-muted);
+  }
+  .meta-value { font-size: 0.9rem; color: var(--muted); font-weight: 400; }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 6rem 5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .eyebrow {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+  .section-intro {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 640px;
+    line-height: 1.85;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ── WHY SECTION ── */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 960px;
+  }
+  .why-col-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--light-muted);
+    margin-bottom: 1.5rem;
+  }
+  .why-stat { margin-bottom: 1.75rem; }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .stat-label { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+  .gap-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+  .gap-list li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    padding-left: 1.4rem;
+    position: relative;
+    line-height: 1.7;
+  }
+  .gap-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.8rem;
+    top: 0.05em;
+  }
+  .gap-list li strong { color: var(--text); font-weight: 700; }
+
+  /* ── MODULES GRID ── */
+  .modules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    max-width: 1060px;
+  }
+  .module-card {
+    padding: 2.75rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .module-card:nth-child(even) { border-right: none; }
+  .module-card:nth-last-child(-n+2) { border-bottom: none; }
+  .module-number {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--border);
+    margin-bottom: 0.85rem;
+  }
+  .module-rule { width: 28px; height: 2px; background: var(--accent); margin-bottom: 0.85rem; }
+  .module-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.9rem;
+    line-height: 1.3;
+  }
+  .module-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .module-card ul li {
+    font-size: 0.875rem;
+    color: var(--muted);
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.7;
+  }
+  .module-card ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.78rem;
+    top: 0.05em;
+  }
+  .module-card ul li strong { color: var(--text); font-weight: 700; }
+  .future-note {
+    max-width: 1060px;
+    margin-top: 1.5rem;
+    padding: 1.5rem 2rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .future-badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    background: transparent;
+    border: 1px solid var(--accent2);
+    padding: 0.25rem 0.65rem;
+    white-space: nowrap;
+    margin-top: 0.1rem;
+  }
+  .future-note p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .future-note p strong { color: var(--text); font-weight: 700; }
+
+  /* ── AI AGENTS ── */
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    max-width: 1060px;
+  }
+  .agent-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .agent-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--accent-light);
+    border: 1px solid rgba(184, 76, 30, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .agent-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+  }
+  .agent-trigger {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.9rem;
+  }
+  .agent-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.72;
+    flex: 1;
+    margin-bottom: 1rem;
+  }
+  .agent-impact {
+    font-size: 0.8rem;
+    color: var(--text);
+    font-weight: 700;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--border);
+    line-height: 1.55;
+  }
+
+  /* ── DASHBOARD MOCKUP ── */
+  .dashboard-mockup {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    max-width: 880px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 24px rgba(30, 26, 22, 0.05);
+  }
+  .mockup-bar {
+    background: #1e1a16;
+    padding: 0.65rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .dot-r { background: #7a3a2a; }
+  .dot-y { background: #7a6a2a; }
+  .dot-g { background: #2a6a3a; }
+  .mockup-url {
+    flex: 1;
+    text-align: center;
+    font-size: 0.7rem;
+    color: #6b6358;
+    letter-spacing: 0.06em;
+  }
+  .mockup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .mockup-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .mockup-brand span { color: var(--accent); }
+  .mockup-live {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+  }
+  .mockup-tabs {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-bottom: 1px solid var(--border);
+  }
+  .mtab {
+    padding: 0.72rem 0.5rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--muted);
+    border-right: 1px solid var(--border);
+  }
+  .mtab:last-child { border-right: none; }
+  .mtab.active { background: var(--accent-light); color: var(--accent); }
+  .mockup-widgets {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .mwidget {
+    padding: 1.5rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .mwidget:nth-child(3n) { border-right: none; }
+  .mwidget:nth-last-child(-n+3) { border-bottom: none; }
+  .w-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--light-muted);
+    margin-bottom: 0.45rem;
+  }
+  .w-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+  .w-sub { font-size: 0.72rem; color: var(--muted); }
+  .int-row {
+    max-width: 880px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .int-tag {
+    font-size: 0.72rem;
+    color: var(--muted);
+    padding: 0.28rem 0.75rem;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    font-weight: 300;
+  }
+  .int-tag b { color: var(--accent2); font-weight: 700; }
+  .int-row-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--light-muted);
+    margin-bottom: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    max-width: 1060px;
+    margin-bottom: 2rem;
+  }
+  .phase-card {
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .phase-head {
+    background: var(--bg2);
+    padding: 1.5rem 1.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .phase-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--light-muted);
+    margin-bottom: 0.25rem;
+  }
+  .phase-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.15rem;
+  }
+  .phase-dates { font-size: 0.8rem; color: var(--accent); font-weight: 700; }
+  .phase-body { padding: 1.75rem; }
+  .phase-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+  .phase-list li {
+    font-size: 0.85rem;
+    color: var(--muted);
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.65;
+  }
+  .phase-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.75rem;
+    top: 0.05em;
+  }
+  .milestones {
+    max-width: 1060px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+  .milestone {
+    padding: 1.25rem 1.5rem;
+    border-right: 1px solid var(--border);
+  }
+  .milestone:last-child { border-right: none; }
+  .m-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--light-muted);
+    margin-bottom: 0.25rem;
+  }
+  .m-val { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+  .m-note { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
+
+  /* ── ROAD AHEAD ── */
+  .ahead-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 960px;
+  }
+  .ahead-block .blk-rule { width: 28px; height: 2px; background: var(--accent); margin-bottom: 0.85rem; }
+  .ahead-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .ahead-block ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+  .ahead-block ul li {
+    font-size: 0.875rem;
+    color: var(--muted);
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.7;
+  }
+  .ahead-block ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.78rem;
+    top: 0.05em;
+  }
+  .ahead-block ul li strong { color: var(--text); font-weight: 700; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2.5rem 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg2);
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .footer-note {
+    font-size: 0.72rem;
+    color: var(--light-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Design <span>Roofing</span></div>
+  <ul class="nav-links">
+    <li><a href="#build">What Gets Built</a></li>
+    <li><a href="#ai">AI at the Core</a></li>
+    <li><a href="#platform">How It's Built</a></li>
+    <li><a href="#timeline">Build Plan</a></li>
+    <li><a href="#ahead">Road Ahead</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">Marketing Build — June 2026</div>
+  <h1>Design Roofing<br><em>RoofOS</em></h1>
+  <p class="hero-sub">A proprietary, AI-native marketing platform built in-house. Full ownership of every channel, every lead, and every dollar — with the infrastructure to scale across every future acquisition.</p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <div class="meta-label">Verticals</div>
+      <div class="meta-value">Residential · Commercial · Storm</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">AI Layer</div>
+      <div class="meta-value">Anthropic Claude — Native</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Build Target</div>
+      <div class="meta-value">90 Days to Live</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">CRM Integration</div>
+      <div class="meta-value">AccuLynx — Phase 1</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY WE'RE BUILDING THIS -->
+<section id="why">
+  <div class="eyebrow">Context</div>
+  <h2 class="section-title">Why We're Building This</h2>
+  <p class="section-intro">RoofOS is Design Roofing's proprietary marketing platform — built in-house, owned outright, and designed to scale. We're proving it in Austin first, then taking it nationwide as we grow and acquire. The $143,000 we currently spend annually on outsourced marketing is the baseline we're replacing with infrastructure we control permanently.</p>
+
+  <div class="why-grid">
+    <div>
+      <div class="why-col-label">The Opportunity</div>
+      <div class="why-stat">
+        <div class="stat-number">$143K</div>
+        <div class="stat-label">Annual spend on outsourced marketing — capital currently funding a vendor's platform, not our own</div>
+      </div>
+      <div class="why-stat">
+        <div class="stat-number">Nationwide</div>
+        <div class="stat-label">The scale target — prove the platform in Austin, then deploy it across every acquisition as we grow</div>
+      </div>
+      <div class="why-stat">
+        <div class="stat-number">None</div>
+        <div class="stat-label">AI integration in the current program — all content produced manually at a fixed monthly pace with no automation layer</div>
+      </div>
+    </div>
+    <div>
+      <div class="why-col-label">What the Current Program Misses</div>
+      <ul class="gap-list">
+        <li><strong>Google LSA — not in the program.</strong> The #1 ROI channel for roofing in 2026. $40–$120 per verified lead, Google Guarantee badge, appears above all standard paid ads. Industry consensus: every roofer should run this first.</li>
+        <li><strong>Speed-to-lead automation.</strong> First contractor to respond wins 40%+ of leads. The 5-minute window is critical — leads not contacted in under 2 minutes convert 80% less. No AI-powered instant response in the current contract.</li>
+        <li><strong>Storm surge automation.</strong> No weather-triggered campaign activation. Every storm event requires manual coordination — a direct cost for a business where storm and insurance work is a core revenue line.</li>
+        <li><strong>Commercial lead channels.</strong> Commercial roofing requires different channels: LinkedIn, bid platforms, GC partnerships. None are addressed in the current scope.</li>
+        <li><strong>Data ownership.</strong> All performance data, contacts, and campaign history live inside the vendor's dashboard. No owned analytics layer, no export pipeline, no continuity if the contract ends.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT GETS BUILT -->
+<section id="build">
+  <div class="eyebrow">Platform Features</div>
+  <h2 class="section-title">What Gets Built</h2>
+  <p class="section-intro">Six modules, one platform — covering every channel and function the business needs. Each is owned infrastructure, not a rented vendor relationship.</p>
+
+  <div class="modules-grid">
+
+    <div class="module-card">
+      <div class="module-number">01</div>
+      <div class="module-rule"></div>
+      <h3>Lead Capture — Three Verticals</h3>
+      <ul>
+        <li>Dedicated landing page per vertical: <strong>residential re-roof, commercial, and storm/insurance</strong></li>
+        <li>Lead forms with source tracking — every lead tagged to the campaign and channel that drove it</li>
+        <li>Owned call tracking — phone leads attributed correctly, numbers never locked to a vendor</li>
+        <li>Google LSA integration — the biggest gap in the current program, built in from day one</li>
+        <li>All form fills, calls, and LSA leads flow directly into AccuLynx automatically</li>
+        <li>108+ service area pages across Central Texas and expanding markets</li>
+      </ul>
+    </div>
+
+    <div class="module-card">
+      <div class="module-number">02</div>
+      <div class="module-rule"></div>
+      <h3>Campaign Engine</h3>
+      <ul>
+        <li>Build, launch, and monitor <strong>Google Ads, Meta Ads, and Google LSA</strong> from one dashboard — no agency access needed</li>
+        <li>No approval cycles — campaigns go live the same day a storm hits or a new promotion is needed</li>
+        <li>Pre-built campaign templates per vertical, ready to activate with minimal setup</li>
+        <li>Budget controls and real-time spend alerts so ad spend never runs unchecked</li>
+        <li>Negative keyword management, audience targeting, and lookalike audiences built in</li>
+        <li>Campaign performance history accumulates — every decision gets smarter over time</li>
+      </ul>
+    </div>
+
+    <div class="module-card">
+      <div class="module-number">03</div>
+      <div class="module-rule"></div>
+      <h3>Content & Social</h3>
+      <ul>
+        <li>AI-generated ad copy across all three verticals, produced on demand — no copywriter required</li>
+        <li>Automated publishing to <strong>Facebook, Instagram, LinkedIn, and TikTok</strong> on a scheduled cadence</li>
+        <li>Google Business Profile post automation — 8+ posts per month, AI-generated and auto-published</li>
+        <li>SEO blog posts and service pages — 24+ per year, faster than any manual content program</li>
+        <li>Local content per market — city-specific landing pages and content auto-tailored by service area</li>
+        <li>Consistent brand voice maintained across every channel and every market, at scale</li>
+      </ul>
+    </div>
+
+    <div class="module-card">
+      <div class="module-number">04</div>
+      <div class="module-rule"></div>
+      <h3>Automation & AI Agents</h3>
+      <ul>
+        <li><strong>Speed-to-lead agent</strong> — responds to every new lead within 60 seconds via SMS and email, automatically, 24/7</li>
+        <li><strong>Storm surge agent</strong> — monitors weather data by zip code, activates pre-built campaigns the moment an event is detected</li>
+        <li><strong>Review request agent</strong> — fires a post-job review sequence when a job is closed in AccuLynx, no manual step</li>
+        <li><strong>Lead router</strong> — assigns every inbound lead to the right rep by service type and geography instantly</li>
+        <li><strong>Content scheduler</strong> — queues and publishes AI-generated content across all platforms on a set cadence</li>
+        <li><strong>Campaign monitor</strong> — watches spend and performance, surfaces budget alerts and optimization flags</li>
+      </ul>
+    </div>
+
+    <div class="module-card">
+      <div class="module-number">05</div>
+      <div class="module-rule"></div>
+      <h3>Analytics & Reporting</h3>
+      <ul>
+        <li>Key metrics visible on the main dashboard — CPL, conversion rate, active spend, leads by channel</li>
+        <li>Full analytics view with cross-channel attribution — see exactly what's producing leads and at what cost</li>
+        <li>Campaign history builds over time — every future decision is informed by real performance data</li>
+        <li>Automated monthly reports compiled and delivered to stakeholders without any manual work</li>
+        <li>All data owned — stored in our infrastructure, never locked inside a vendor dashboard</li>
+        <li>Built for multi-market from day one — Austin TX and WV in one unified view</li>
+      </ul>
+    </div>
+
+    <div class="module-card">
+      <div class="module-number">06</div>
+      <div class="module-rule"></div>
+      <h3>Reputation & Reviews</h3>
+      <ul>
+        <li>Automated review requests post-job — SMS first, email follow-up — no manual outreach required</li>
+        <li>Google Business Profile management across all locations from a single dashboard</li>
+        <li>Monitor and respond to new reviews without logging in and out of multiple accounts</li>
+        <li>Review velocity tracking — 25+ reviews at 4.5 stars is the minimum to compete for LSA placement</li>
+        <li>Review volume directly impacts LSA rank, map pack placement, and organic conversion rate</li>
+        <li>One of the highest-leverage, lowest-cost automations in the entire platform</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="future-note">
+    <div class="future-badge">Future Phase</div>
+    <p><strong>Multi-Brand White Label</strong> — The platform is architected from day one for multi-tenant operation. When acquisitions begin in 2027, each new company connects to the same infrastructure — their own branded instance, local identity preserved, no custom build required per acquisition.</p>
+  </div>
+</section>
+
+<!-- AI AT THE CORE -->
+<section id="ai">
+  <div class="eyebrow">The AI Advantage</div>
+  <h2 class="section-title">AI at the Core</h2>
+  <p class="section-intro">AI isn't a feature added to this platform — it's the operating layer that makes the whole thing possible at this scale without a large team. Six agents built on Anthropic Claude run autonomously across every module, handling the work that would otherwise require daily manual effort or additional headcount.</p>
+
+  <div class="agents-grid">
+
+    <div class="agent-card">
+      <div class="agent-icon">⚡</div>
+      <div class="agent-name">Speed-to-Lead Agent</div>
+      <div class="agent-trigger">Trigger — New lead captured</div>
+      <p class="agent-desc">When a lead comes in — form fill, call, or LSA — the agent sends a personalized SMS and email response within 60 seconds. No manual step. Runs 24 hours a day across all three verticals.</p>
+      <div class="agent-impact">First responder wins 40%+ of leads. Leads not contacted in under 2 minutes convert 80% less.</div>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-icon">🌩</div>
+      <div class="agent-name">Storm Surge Agent</div>
+      <div class="agent-trigger">Trigger — Hail or storm event detected</div>
+      <p class="agent-desc">Monitors weather and hail event data by zip code in real time. When an event fires, pre-built campaigns auto-activate, landing pages update, and ad budgets shift — no manual coordination at any step.</p>
+      <div class="agent-impact">Campaigns live before competitors even know a storm hit. Critical for the storm and insurance revenue line.</div>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-icon">★</div>
+      <div class="agent-name">Review Request Agent</div>
+      <div class="agent-trigger">Trigger — Job closed in AccuLynx</div>
+      <p class="agent-desc">Reads job status from AccuLynx and fires a personalized review request sequence — SMS first, email follow-up — without any manual trigger. Timing and messaging are optimized per service type.</p>
+      <div class="agent-impact">Review velocity is a primary LSA ranking factor. This builds it automatically, every job, every time.</div>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-icon">→</div>
+      <div class="agent-name">Lead Router</div>
+      <div class="agent-trigger">Trigger — New lead assigned</div>
+      <p class="agent-desc">Routes every inbound lead to the right sales rep based on service type and geography. No manual assignment, no leads sitting in a queue, no handoff delays between incoming lead and first contact.</p>
+      <div class="agent-impact">Every lead gets to the right person immediately — consistent follow-up regardless of time of day.</div>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-icon">◈</div>
+      <div class="agent-name">Content Scheduler</div>
+      <div class="agent-trigger">Trigger — Scheduled cadence or on-demand request</div>
+      <p class="agent-desc">Claude generates content — ad copy, social posts, GBP updates, email campaigns, blog drafts — and the agent queues and publishes across all platforms automatically on schedule.</p>
+      <div class="agent-impact">24+ blog posts/year, 8+ GBP posts/month, daily social across all platforms — zero manual publishing.</div>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-icon">◎</div>
+      <div class="agent-name">Campaign Monitor</div>
+      <div class="agent-trigger">Trigger — Continuous performance watch</div>
+      <p class="agent-desc">Watches campaign spend and performance across Google, Meta, and LSA. Surfaces budget overage alerts, underperformance flags, and optimization opportunities without requiring daily manual review.</p>
+      <div class="agent-impact">Active campaign management at scale — catches problems and surfaces wins before they become costly decisions.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT'S BUILT -->
+<section id="platform">
+  <div class="eyebrow">The Platform</div>
+  <h2 class="section-title">How It's Built</h2>
+  <p class="section-intro">One login. One dashboard. Every module — lead capture, campaigns, content, AI agents, analytics, and reviews — accessible from a single interface designed for marketing staff to operate daily without technical support. The AI layer runs underneath everything.</p>
+
+  <div class="dashboard-mockup">
+    <div class="mockup-bar">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+      <div class="mockup-url">app.designroofingos.com</div>
+    </div>
+    <div class="mockup-header">
+      <div class="mockup-brand">Design <span>Roofing</span> — RoofOS</div>
+      <div class="mockup-live">● Live — Austin TX</div>
+    </div>
+    <div class="mockup-tabs">
+      <div class="mtab active">Leads</div>
+      <div class="mtab">Campaigns</div>
+      <div class="mtab">Content</div>
+      <div class="mtab">AI Agents</div>
+      <div class="mtab">Analytics</div>
+      <div class="mtab">Reviews</div>
+    </div>
+    <div class="mockup-widgets">
+      <div class="mwidget">
+        <div class="w-label">Leads This Month</div>
+        <div class="w-val">84</div>
+        <div class="w-sub">+12 vs. last month</div>
+      </div>
+      <div class="mwidget">
+        <div class="w-label">Avg. Cost Per Lead</div>
+        <div class="w-val">$67</div>
+        <div class="w-sub">LSA · Search · Meta</div>
+      </div>
+      <div class="mwidget">
+        <div class="w-label">Response Time</div>
+        <div class="w-val">&lt;60s</div>
+        <div class="w-sub">Automated — all leads</div>
+      </div>
+      <div class="mwidget">
+        <div class="w-label">Active Campaigns</div>
+        <div class="w-val">7</div>
+        <div class="w-sub">3 residential · 2 storm · 2 commercial</div>
+      </div>
+      <div class="mwidget">
+        <div class="w-label">Review Rating</div>
+        <div class="w-val">4.8★</div>
+        <div class="w-sub">142 Google reviews</div>
+      </div>
+      <div class="mwidget">
+        <div class="w-label">Content Published</div>
+        <div class="w-val">38</div>
+        <div class="w-sub">Posts this month · all platforms</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="int-row-label">Connected To</p>
+  <div class="int-row">
+    <div class="int-tag"><b>AccuLynx</b> — CRM</div>
+    <div class="int-tag"><b>Google Ads</b> — Search</div>
+    <div class="int-tag"><b>Google LSA</b> — Verified Leads</div>
+    <div class="int-tag"><b>Meta Ads</b> — FB + IG</div>
+    <div class="int-tag"><b>Twilio</b> — SMS + Call Tracking</div>
+    <div class="int-tag"><b>SendGrid</b> — Email</div>
+    <div class="int-tag"><b>Google Business Profile</b></div>
+    <div class="int-tag"><b>TikTok</b> — Social</div>
+    <div class="int-tag"><b>LinkedIn</b> — Commercial</div>
+    <div class="int-tag"><b>Weather API</b> — Storm Surge</div>
+    <div class="int-tag"><b>Anthropic Claude</b> — AI Layer</div>
+  </div>
+</section>
+
+<!-- 90-DAY BUILD PLAN -->
+<section id="timeline">
+  <div class="eyebrow">The Build Plan</div>
+  <h2 class="section-title">90 Days to Live</h2>
+  <p class="section-intro">Three focused phases, each with a clear output. The goal is a working platform in production within 90 days — live, generating real leads, and testable — with time to optimize before acquisitions begin in 2027.</p>
+
+  <div class="timeline-grid">
+
+    <div class="phase-card">
+      <div class="phase-head">
+        <div class="phase-label">Phase 1</div>
+        <div class="phase-title">Foundation</div>
+        <div class="phase-dates">Days 1–30</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-list">
+          <li>Dashboard shell, authentication, and core navigation</li>
+          <li>Three vertical landing pages — residential, commercial, storm</li>
+          <li>AccuLynx CRM integration — lead handoff and status sync</li>
+          <li>Owned call tracking setup — SMS infrastructure and number provisioning</li>
+          <li>Google LSA account setup and integration</li>
+          <li>Basic lead capture and source attribution running</li>
+          <li>Social accounts connected — Facebook, Instagram, LinkedIn, TikTok publishing from day one</li>
+          <li>AI content generation live — social posts, ad copy, and GBP updates begin immediately</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-head">
+        <div class="phase-label">Phase 2</div>
+        <div class="phase-title">Campaign & Automation</div>
+        <div class="phase-dates">Days 31–60</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-list">
+          <li>Campaign management dashboard — Google Ads, Meta Ads, LSA</li>
+          <li>Email and SMS drip sequences per vertical</li>
+          <li>Speed-to-lead AI agent — 60-second response on all leads</li>
+          <li>Lead router — automatic rep assignment by service and area</li>
+          <li>Analytics dashboard — CPL, conversion, active spend</li>
+          <li>AI content generation workflow — ad copy, email, GBP posts</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-head">
+        <div class="phase-label">Phase 3</div>
+        <div class="phase-title">Full Automation + Go-Live</div>
+        <div class="phase-dates">Days 61–90</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-list">
+          <li>Storm surge agent — weather trigger to campaign activation</li>
+          <li>Review request automation — AccuLynx job close trigger</li>
+          <li>Campaign monitor agent — spend and performance alerts</li>
+          <li>Full analytics view and automated monthly reporting</li>
+          <li>Social publishing automation fully connected across all platforms</li>
+          <li>QA, testing, and platform go-live</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="milestones">
+    <div class="milestone">
+      <div class="m-label">Go-Live</div>
+      <div class="m-val">Day 90</div>
+      <div class="m-note">Platform live — Austin TX market</div>
+    </div>
+    <div class="milestone">
+      <div class="m-label">Optimize & Expand</div>
+      <div class="m-val">Q4 2026</div>
+      <div class="m-note">Refine, iterate, expand to WV markets</div>
+    </div>
+    <div class="milestone">
+      <div class="m-label">Acquisition-Ready</div>
+      <div class="m-val">Q1 2027</div>
+      <div class="m-note">Multi-brand infrastructure in place</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROAD AHEAD -->
+<section id="ahead">
+  <div class="eyebrow">The Road Ahead</div>
+  <h2 class="section-title">What Comes Next</h2>
+  <p class="section-intro">The 90-day build is the foundation. What gets built in the months that follow turns a single-company marketing tool into a competitive asset at scale.</p>
+
+  <div class="ahead-grid">
+    <div class="ahead-block">
+      <div class="blk-rule"></div>
+      <h3>Q4 2026 — Test & Optimize</h3>
+      <ul>
+        <li>Platform live in Austin TX — real campaigns, real leads, real performance data</li>
+        <li>Measure every channel against the benchmarks from the prior program</li>
+        <li>Iterate on landing pages, ad copy, and automation sequences based on results</li>
+        <li>Expand service area pages across the full Central Texas market</li>
+        <li>Activate WV and KY markets through the same platform</li>
+        <li><strong>Build review velocity</strong> — 25+ reviews at 4.5 stars minimum to compete on LSA</li>
+      </ul>
+    </div>
+    <div class="ahead-block">
+      <div class="blk-rule"></div>
+      <h3>2027 — Acquisition Mode</h3>
+      <ul>
+        <li>Multi-brand white label infrastructure in place before the first acquisition closes</li>
+        <li>New company onboarding via configuration — no custom build per acquisition</li>
+        <li>Cross-company analytics visible in a single HQ dashboard from day one</li>
+        <li>Each acquisition's marketing live within days of deal close, not months</li>
+        <li>Platform data accumulates across markets — every new company learns from the last</li>
+        <li><strong>No per-company agency retainers</strong> — every acquisition uses the same owned platform</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Design Roofing — RoofOS Marketing Build</div>
+  <div class="footer-note">Confidential — Strategy Session · June 2026</div>
+</footer>
+
+</body>
+</html>
